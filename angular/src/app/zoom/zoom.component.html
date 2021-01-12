@@ -1,0 +1,43 @@
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #editItem2Form="ngForm"
+  (ngSubmit)="save()"
+>
+        <div class="row">
+            <div class="col-md-6">
+                    <label for="token">
+                    Your Token
+                    </label>
+                    <input
+                    class="form-control"
+                    type="text"
+                    name="token"
+                    id="token"
+                    [(ngModel)]="token"
+                    #nameModel="ngModel"
+                    #nameEl
+                    >
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                    <label for="userId">
+                        User Id
+                    </label>
+                    <input 
+                    class="form-control"
+                    type="text"
+                    name="userId"
+                    id="userId"
+                    [(ngModel)]="userId"
+                    #priceModel="ngModel"
+                    #priceEl
+                    >
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Meeting</button>
+
+</form>
+
+<button class="btn btn-primary" (click)="joinMeeting()">joinMeeting</button>
