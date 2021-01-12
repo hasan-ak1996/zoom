@@ -14,10 +14,12 @@ ZoomMtg.prepareJssdk();
 export class ZoomComponent implements OnInit {
   token : string;
   userId : string;
+  apiKey: string;
+  apiSecret : string;
+  username : string;
   meetingID : number = 0 ;
   meetingURL : string = '';
   meetingPassword : string = '';
-
   public meetConfig : any;
   public signature : any;
   constructor(public http : HttpClient) {
@@ -34,16 +36,20 @@ export class ZoomComponent implements OnInit {
     formData.append('Token', this.token);
     formData.append('User_id', this.userId);
     this.http.post("https://localhost:44397/Zoom/CreateMeeting",formData).subscribe((res : any) => {
+      var parsed = JSON.parse(res.content);
+      console.log(parsed)
+      this.meetingID = parsed.id;
+      console.log( this.meetingID )
+      this.meetingURL = parsed.start_url;
+      console.log(this.meetingURL)
+      this.meetingPassword = parsed.password
+      console.log( this.meetingPassword)
       //this.meetingID = res.id;
       //console.log(res.id)
       //this.meetingURL = res.start_url;
       //console.log( this.meetingURL)
       //this.meetingPassword = res.password;
       //console.log(this.meetingPassword)
-      
-      this.meetingID =res.content.id
-      console.log(this.meetingID)
-      console.log(res.content)
     });
     //this.http.get("https://localhost:44397/Zoom").subscribe((res) => {
     //    console.log(res)
@@ -52,12 +58,15 @@ export class ZoomComponent implements OnInit {
     //eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6Ii03a3JrbmwwUU5HUTZIT2ZQOU03WVEiLCJleHAiOjE2MTA1MzEwMDcsImlhdCI6MTYxMDQ0NDYwOX0.wQ5txjzdIfVcp9yoON3ccWVTT9dDeuf8hDF36X2XkbU
   }
   setConfig(val : string){
+    //-7krknl0QNGQ6HOfP9M7YQ
+    //TCaNrnzrXQ8i5Hz6WWomAy6iOjMV5oyKpzkb
+    //hasan alhallak
     this.meetConfig = {
-      apiKey: '-7krknl0QNGQ6HOfP9M7YQ',
-      apiSecret: 'TCaNrnzrXQ8i5Hz6WWomAy6iOjMV5oyKpzkb',
+      apiKey: this.apiKey,
+      apiSecret: this.apiSecret,
       meetingNumber: val,
-      userName : 'hasan alhallak',
-      passWord: "uHR1gj",
+      userName : this.username,
+      passWord: this.meetingPassword,
       leaveUrl: "http://localhost:4200",
       role: 1
     };
@@ -97,7 +106,7 @@ export class ZoomComponent implements OnInit {
   }
 
   joinMeeting(){
-    this.setConfig("82830280338");
+    this.setConfig(this.meetingID.toString());
     document.getElementById('zmmtg-root').style.display = 'block'
   }
 

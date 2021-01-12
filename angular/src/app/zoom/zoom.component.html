@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-6">
                     <label for="userId">
-                        User Id
+                        User Email
                     </label>
                     <input 
                     class="form-control"
@@ -36,8 +36,60 @@
                     >
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Create Meeting</button>
+
+        <div class="row">
+            <div class="col-md-6">
+                    <label for="apiKey">
+                        Your apiKey
+                    </label>
+                    <input 
+                    class="form-control"
+                    type="text"
+                    name="apiKey"
+                    id="apiKey"
+                    [(ngModel)]="apiKey"
+                    #apiKeyModel="ngModel"
+                    #priceEl
+                    >
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                    <label for="apiSecret">
+                        Your apiSecret
+                    </label>
+                    <input 
+                    class="form-control"
+                    type="text"
+                    name="apiSecret"
+                    id="apiSecret"
+                    [(ngModel)]="apiSecret"
+                    #apiSecretModel="ngModel"
+                    #priceEl
+                    >
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                    <label for="username">
+                       Zoom User Name
+                    </label>
+                    <input 
+                    class="form-control"
+                    type="text"
+                    name="username"
+                    id="username"
+                    [(ngModel)]="username"
+                    #usernameModel="ngModel"
+                    #priceEl
+                    >
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary my-3">Create Meeting</button>
 
 </form>
 
-<button class="btn btn-primary" (click)="joinMeeting()">joinMeeting</button>
+<button class="btn btn-primary mr-3" (click)="joinMeeting()">join Meeting</button>
+<a class="btn btn-primary" target="_blank" [href]="meetingURL">join by url</a>
